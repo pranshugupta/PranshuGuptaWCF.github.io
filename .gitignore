@@ -2,32 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/GegraphicService/.vs
-/GegraphicService/.cr/personal/Editor
-/GegraphicService/GeoLibContracts/obj/Debug
-/GegraphicService/GeoLibContracts/bin/Debug
-/GegraphicService/GeoLibRespositories/obj/Debug
-/GegraphicService/GeoLibRespositories/bin/Debug
-/GegraphicService/GeoLibServices/obj/Debug
-/GegraphicService/GeoLibServices/bin/Debug
-/GegraphicService/GeoLibTest/obj/Debug
-/GegraphicService/GeoLibTest/bin/Debug
-/GegraphicService/Hosting/ConsoleHosting/obj/Debug
-/GegraphicService/Hosting/ConsoleHosting/bin/Debug
-/GegraphicService/Hosting/WebHosting/obj/Debug
-/GegraphicService/Hosting/WebHosting/bin
-/Gegraphics/.vs
-/Gegraphics/.cr/personal/Editor
-/Gegraphics/GeoLibContracts/obj/Debug
-/Gegraphics/GeoLibContracts/bin/Debug
-/Gegraphics/Gegraphics.sln
-/Gegraphics/GeoLibRespositories/obj/Debug
-/Gegraphics/GeoLibRespositories/bin/Debug
-/Gegraphics/GeoLibServices/obj/Debug
-/Gegraphics/GeoLibServices/bin/Debug
-/Gegraphics/GeoLibTest/obj/Debug
-/Gegraphics/GeoLibTest/bin/Debug
-/Gegraphics/Hosting/ConsoleHosting/obj/Debug
-/Gegraphics/Hosting/ConsoleHosting/bin/Debug
-/Gegraphics/Hosting/WebHosting/obj/Debug
-/Gegraphics/Hosting/WebHosting/bin
+*.vs
+bin
+obj
+.cr
+packages
