@@ -10,6 +10,8 @@ namespace ConsoleHosting
         {
             ServiceHost hostGeoManager = new ServiceHost(typeof(GeoManager));
 
+            ServiceHost hostStatefullGeoManager = new ServiceHost(typeof(StatefullGeoManager));
+
             #region
             // you can also provide endpoints from here just comment the service config in app.config.
             // Same can be done in CustomHosting
@@ -21,10 +23,12 @@ namespace ConsoleHosting
             */
             #endregion
 
+            hostStatefullGeoManager.Open();
             hostGeoManager.Open(); // It requires endpoint configurations
             Console.WriteLine("Service started, Press [Enter] to exit");
             Console.ReadKey();
 
+            hostStatefullGeoManager.Close();
             hostGeoManager.Close();
         }
     }

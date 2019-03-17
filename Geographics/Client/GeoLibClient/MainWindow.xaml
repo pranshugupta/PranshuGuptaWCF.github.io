@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:GeoLibClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock Name="myText"></TextBlock>
+        <Button Name="mybutton" Click="Mybutton_Click"></Button>
+        <Button Name="OneWay" Click="OneWay_Click"></Button>
+    </StackPanel>
 </Window>

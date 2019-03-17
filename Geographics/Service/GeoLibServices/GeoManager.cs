@@ -1,6 +1,8 @@
 ﻿using GeoLibContracts;
 using GeoLibRespositories;
 using System.Collections.Generic;
+using System.ServiceModel;
+using System.Threading;
 
 namespace GeoLibServices
 {
@@ -38,6 +40,7 @@ namespace GeoLibServices
 
         public ZipCodeData GetZipInfo(string zip)
         {
+            Thread.Sleep(10000);
             if (null == _zipCodeRepo)
             {
                 _zipCodeRepo = new ZipCodeRepository();
@@ -96,6 +99,24 @@ namespace GeoLibServices
             }
 
             return zipCodeDatas;
+        }
+
+
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public void UpdateZip(string zip, string city)
+        {
+            if (null == _zipCodeRepo)
+            {
+                _zipCodeRepo = new ZipCodeRepository();
+            }
+            _zipCodeRepo.UpdateZip(zip, city);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public void OneWayExample()
+        {
+            IUpdateCallback callback = OperationContext.Current.GetCallbackChannel<IUpdateCallback>();
+            callback.updated("test");
         }
     }
 }

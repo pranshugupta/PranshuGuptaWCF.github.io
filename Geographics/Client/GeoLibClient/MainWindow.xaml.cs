@@ -13,7 +13,7 @@ namespace GeoLibClient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IUpdateCallback
     {
         public MainWindow()
         {
@@ -25,13 +25,14 @@ namespace GeoLibClient
 
         private void GetZipInfo(string zip)
         {
-            GeoClient proxy = new GeoClient("httpE");
+            GeoClient proxy = new GeoClient(new InstanceContext(this), "tcpE");
 
             ZipCodeData data = proxy.GetZipInfo(zip);
 
 
             // wcf has limited no of connection pipe so we must close it.
             proxy.Close();
+            myText.Text = data.City;
         }
 
         private void GetZipCodes(string state)
@@ -39,7 +40,7 @@ namespace GeoLibClient
             EndpointAddress address = new EndpointAddress("http://localhost:4200/GeoService");
             Binding binding = new BasicHttpBinding();
 
-            GeoClient proxy = new GeoClient(binding, address);
+            GeoClient proxy = new GeoClient(new InstanceContext(this), binding, address);
 
             IEnumerable<ZipCodeData> data = proxy.GetZips("State");
             proxy.Close();
@@ -65,13 +66,43 @@ namespace GeoLibClient
 
         private void TestExtensibleData()
         {
-            GeoClient proxy = new GeoClient("webEp");
+            GeoClient proxy = new GeoClient(new InstanceContext(this), "webEp");
 
             ZipCodeData data = proxy.GetZipInfo("12345");
 
 
             // wcf has limited no of connection pipe so we must close it.
             proxy.Close();
+        }
+
+        private void Mybutton_Click(object sender, RoutedEventArgs e)
+        {
+            GeoClient proxy = new GeoClient(new InstanceContext(this), "webEp");
+
+            proxy.UpdateZip("12345-1", "MyCity -1");
+            // client is blocked
+
+            // wcf has limited no of connection pipe so we must close it.
+            proxy.Close();
+
+        }
+
+        private void OneWay_Click(object sender, RoutedEventArgs e)
+        {
+
+            GeoClient proxy = new GeoClient(new InstanceContext(this), "webEp");
+
+            proxy.OneWayExample();
+
+            // client is not blocked
+            // wcf has limited no of connection pipe so we must close it.
+            proxy.Close();
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public void updated(string s)
+        {
+            // callback
         }
     }
 }
